@@ -5,7 +5,9 @@ package org.xtext.example.mydsl.formatting2;
 
 import com.google.inject.Inject;
 import empresa.Company;
+import empresa.DBServer;
 import empresa.Dashboard;
+import empresa.Panel;
 import java.util.Arrays;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -22,20 +24,20 @@ public class MyDslFormatter extends AbstractFormatter2 {
   private MyDslGrammarAccess _myDslGrammarAccess;
   
   protected void _format(final Company company, @Extension final IFormattableDocument document) {
-    EList _dashboards = company.getDashboards();
-    for (final Object dashboard : _dashboards) {
-      document.<Object>format(dashboard);
+    EList<Dashboard> _dashboards = company.getDashboards();
+    for (final Dashboard dashboard : _dashboards) {
+      document.<Dashboard>format(dashboard);
     }
-    EList _dBServers = company.getDBServers();
-    for (final Object dBServer : _dBServers) {
-      document.<Object>format(dBServer);
+    EList<DBServer> _dBServers = company.getDBServers();
+    for (final DBServer dBServer : _dBServers) {
+      document.<DBServer>format(dBServer);
     }
   }
   
   protected void _format(final Dashboard dashboard, @Extension final IFormattableDocument document) {
-    EList _panels = dashboard.getPanels();
-    for (final Object panel : _panels) {
-      document.<Object>format(panel);
+    EList<Panel> _panels = dashboard.getPanels();
+    for (final Panel panel : _panels) {
+      document.<Panel>format(panel);
     }
   }
   

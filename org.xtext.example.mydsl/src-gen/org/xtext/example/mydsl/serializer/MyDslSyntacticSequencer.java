@@ -38,6 +38,8 @@ public class MyDslSyntacticSequencer extends AbstractSyntacticSequencer {
 			return getOBJECT_ENDToken(semanticObject, ruleCall, node);
 		else if (ruleCall.getRule() == grammarAccess.getOBJECT_STARTRule())
 			return getOBJECT_STARTToken(semanticObject, ruleCall, node);
+		else if (ruleCall.getRule() == grammarAccess.getSEMICOLONRule())
+			return getSEMICOLONToken(semanticObject, ruleCall, node);
 		return "";
 	}
 	
@@ -99,6 +101,16 @@ public class MyDslSyntacticSequencer extends AbstractSyntacticSequencer {
 		if (node != null)
 			return getTokenText(node);
 		return "{";
+	}
+	
+	/**
+	 * terminal SEMICOLON:
+	 * 	";";
+	 */
+	protected String getSEMICOLONToken(EObject semanticObject, RuleCall ruleCall, INode node) {
+		if (node != null)
+			return getTokenText(node);
+		return ";";
 	}
 	
 	@Override

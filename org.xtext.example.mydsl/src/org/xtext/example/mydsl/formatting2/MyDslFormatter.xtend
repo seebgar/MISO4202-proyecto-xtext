@@ -18,20 +18,20 @@ class MyDslFormatter extends AbstractFormatter2 {
 
 	def dispatch void format(Company company, extension IFormattableDocument document) {
 		// TODO: format HiddenRegions around keywords, attributes, cross references, etc. 
-		for (Object dashboard : company.getDashboards()) {
+		for (Dashboard dashboard : company.getDashboards()) {
 			dashboard.format;
 		}
-		for (Object dBServer : company.getDBServers()) {
+		for (DBServer dBServer : company.getDBServers()) {
 			dBServer.format;
 		}
 	}
 
 	def dispatch void format(Dashboard dashboard, extension IFormattableDocument document) {
 		// TODO: format HiddenRegions around keywords, attributes, cross references, etc. 
-		for (Object panel : dashboard.getPanels()) {
+		for (Panel panel : dashboard.getPanels()) {
 			panel.format;
 		}
 	}
 	
-	// TODO: implement for DBServer, Panel, Table, Menu, LineChart, BarChart, RadarChart, PieChart, Collection
+	// TODO: implement for Panel, Table, Menu, LineChart, BarChart, RadarChart, PieChart, DBServer, Collection, Document
 }

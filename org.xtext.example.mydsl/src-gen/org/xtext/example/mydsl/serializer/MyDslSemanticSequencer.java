@@ -4,6 +4,7 @@
 package org.xtext.example.mydsl.serializer;
 
 import com.google.inject.Inject;
+import empresa.Attribute;
 import empresa.BarChart;
 import empresa.Collection;
 import empresa.Column;
@@ -49,6 +50,9 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 			switch (semanticObject.eClass().getClassifierID()) {
 			case EmpresaPackage.ACTION:
 				sequence_Action(context, (empresa.Action) semanticObject); 
+				return; 
+			case EmpresaPackage.ATTRIBUTE:
+				sequence_Attribute(context, (Attribute) semanticObject); 
 				return; 
 			case EmpresaPackage.BAR_CHART:
 				sequence_BarChart(context, (BarChart) semanticObject); 
@@ -119,6 +123,18 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	 *     )
 	 */
 	protected void sequence_Action(ISerializationContext context, empresa.Action semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Attribute returns Attribute
+	 *
+	 * Constraint:
+	 *     (name=EString type=EString?)
+	 */
+	protected void sequence_Attribute(ISerializationContext context, Attribute semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -251,16 +267,10 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	 *     Document returns Document
 	 *
 	 * Constraint:
-	 *     name=EString
+	 *     (name=EString attributes+=Attribute attributes+=Attribute*)
 	 */
 	protected void sequence_Document(ISerializationContext context, Document semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, EmpresaPackage.Literals.DOCUMENT__NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, EmpresaPackage.Literals.DOCUMENT__NAME));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getDocumentAccess().getNameEStringParserRuleCall_2_0(), semanticObject.getName());
-		feeder.finish();
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
@@ -277,7 +287,7 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, EmpresaPackage.Literals.LABEL__NAME));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getLabelAccess().getNameEStringParserRuleCall_2_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getLabelAccess().getNameEStringParserRuleCall_4_0(), semanticObject.getName());
 		feeder.finish();
 	}
 	

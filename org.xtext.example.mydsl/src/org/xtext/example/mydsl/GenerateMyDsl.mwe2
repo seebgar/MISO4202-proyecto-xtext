@@ -32,7 +32,7 @@ Workflow {
 		language = StandardLanguage {
 			name = "org.xtext.example.mydsl.MyDsl"
 			fileExtensions = "mydsl"
-			referencedResource = "platform:/resource/uniandes.mdd.grupo.uno.metamodels/xtext/empresa.genmodel"
+			referencedResource = "platform:/resource/uniandes.mdd.grupo.uno.metamodels/xtext/company.genmodel"
 			
 			fragment = ecore2xtext.Ecore2XtextValueConverterServiceFragment2 auto-inject {}
 
